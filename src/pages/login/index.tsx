@@ -112,7 +112,7 @@ export default function LoginPage() {
 			</div>
 			<aside className="flex-col items-center justify-center flex-1 flex-shrink hidden basis-1/4 md:flex">
 				<div className="relative flex flex-col w-full h-full">
-					<img className="w-full h-full select-none pointer-events-none" src="/wallpaper.png" />
+					<img className="w-full h-full select-none pointer-events-none" src="wallpaper.png" />
 				</div>
 			</aside>
 		</div>

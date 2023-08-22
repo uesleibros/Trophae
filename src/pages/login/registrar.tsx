@@ -46,7 +46,7 @@ export default function LoginPage() {
 			return;
 		}
 
-		if(!failedLogin) {
+		if (!failedLogin) {
 			setWaitingRegs(true);
 		}
 		setIsLoading(false);
