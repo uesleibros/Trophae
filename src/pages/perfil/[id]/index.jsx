@@ -9,21 +9,19 @@ export default function Profile() {
 	const id = router.query.id;
 
 	(async () => {
-		if (!id)
-			return;
 		const { data } = await supabase.from("profiles").select("*").eq("id", id).single();
 		setProfile(data);
 	})();
 	return (
 		<>
-			{ profile &&
+			{ profile && (
 				<div className="w-full flex flex-col -mt-10">
 					<div>
 						<img src="/banner.png" className="w-full h-80 object-cover select-none pointer-events-none" />
 					</div>
 					<div className="relative flex items-center sm:flex-col sm:justify-center border-b text-zinc-700 bg-zinc-100 justify-between">
 						<div className="px-10 py-4 flex items-center gap-4 sm:flex-col sm:text-center">
-							<img className="rounded-full h-20 w-20 select-none pointer-events-none" src={ profile.avatar } />
+							<img className="rounded-full h-20 w-20 select-none pointer-events-none" src={  profile.avatar } />
 							<div className="flex-col ml-5">
 								<h2 className="font-bold text-xl mb-1">{ profile.username }</h2>
 								<hr className="mb-2" />
@@ -47,7 +45,7 @@ export default function Profile() {
 						<span>Olá, estou usando o WhatsApp!</span>
 					</div>
 				</div>
-			}
+			)}
 		</>
 	);
 };

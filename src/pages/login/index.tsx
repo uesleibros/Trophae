@@ -37,12 +37,12 @@ export default function LoginPage() {
 		}
 	}
 
-	function validateEmail(input) {
+	function validateEmail(input: string) {
 		const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		return emailPattern.test(input);
 	}
 
-	function validatePassword(input) {
+	function validatePassword(input: string) {
 		const uppercasePattern = /[A-Z]/;
 		const lowercasePattern = /[a-z]/;
 		const numberPattern = /[0-9]/;
@@ -55,7 +55,7 @@ export default function LoginPage() {
 		);
 	}
 
-	function changeField(typeField, field) {
+	function changeField(typeField: string, field: any) {
 		if (typeField === "email") {
 			setEmail(field.target.value);
 			setIsEmailValid(validateEmail(field.target.value));
