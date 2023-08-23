@@ -10,12 +10,10 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	const [user, setUser] = useState(null);
 
-	useEffect(() => {
-		(async () => {
-			const session = await supabase.auth.getUser();
-			setUser(session.data.user);
-		})();
-	}, []);
+	(async () => {
+		const session = await supabase.auth.getUser();
+		setUser(session.data.user);
+	})();
 
 	const signOut = () => {
 		(async () => {

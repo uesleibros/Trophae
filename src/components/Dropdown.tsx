@@ -6,7 +6,7 @@ import Image from "next/image";
 
 interface Props {
   text: string | ReactNode;
-  items: Array<{ label: any, link?: string}>;
+  items: Array<{ label: any, link?: string, divide?: boolean}>;
 }
 
 const Dropdown: NextPage<Props> = (props) => {
@@ -53,7 +53,7 @@ const Dropdown: NextPage<Props> = (props) => {
               <a
                 key={index}
                 href={item.link}
-                className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer ${ index > 0 ? "border-t" : ""}`}
+                className={`block px-4 py-2 text-sm text-gray-700 ${ item.link ? "cursor-pointer hover:text-gray-900 hover:bg-gray-100" : "select-none" } ${ index > 0 && item.divide ? "border-t" : ""}`}
                 role="menuitem"
               >
                 {item.label}

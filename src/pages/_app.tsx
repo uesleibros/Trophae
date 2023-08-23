@@ -12,18 +12,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<meta name="google" content="notranslate" />
 
 				{/* Open Graph */}
-				<meta property="og:title" content="Conquest" />
+				<meta property="og:title" content="Trophae" />
 				<meta property="description" content="O melhor serviço de conquistas feito para projetos criados em PowerPoint." />
 				<meta property="og:description" content="O melhor serviço de conquistas feito para projetos criados em PowerPoint." />
-				<meta property="og:image" content="../../logo.jpg" />
 				
 				{/* Twitter */}
-				<meta property="twitter:title" content="Conquest" />
+				<meta property="twitter:title" content="Trophae" />
 				<meta property="twitter:description" content="O melhor serviço de conquistas feito para projetos criados em PowerPoint." />
 				<meta property="twitter:card" content="summary_large_image" />
-				<meta property="twitter:image" content="../../logo.jpg" />
 
-				<title>Conquest</title>
+				<title>Trophae</title>
 			</Head>
 			<AuthProvider>
 				<Header />

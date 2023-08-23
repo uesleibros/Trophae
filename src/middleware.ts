@@ -13,7 +13,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (request.nextUrl.pathname.startsWith("/auth/callback")) {
+  if (!data.session?.user && request.nextUrl.pathname.startsWith("/perfil/editar")) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (request.nextUrl.pathname.startsWith("/login/auth/callback")) {
     const requestUrl = new URL(request.url);
     const code = requestUrl.searchParams.get("code");
 
@@ -28,10 +32,11 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname == "/auth/signout") {
     const sessionData = await supabase.auth.getSession();
 
-    if (sessionData.data !== null)
+    if (sessionData.data?.session !== null) {
       await supabase.auth.signOut();
-
-    return NextResponse.redirect(new URL("/", request.url));
+    } else {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 
   return response;
