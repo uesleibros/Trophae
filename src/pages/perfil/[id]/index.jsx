@@ -1,9 +1,9 @@
 import supabase from "@/supabase.js";
 import Dropdown from "@/components/Dropdown";
+import { useAuth  } from "@/context/AuthContext.js";
 import { Trophy, MoreVertical } from "lucide-react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { useAuth  } from "@/context/AuthContext.js";
 import { useState, useEffect } from "react";
 
 export default function Profile() {
@@ -25,13 +25,10 @@ export default function Profile() {
 						<title>Trophae – { profile.username }</title>
 					</Head>
 					<div className="w-full flex flex-col -mt-10">
-						<div>
-							<img src="/arts/banner.png" className="w-full h-80 object-cover select-none pointer-events-none" />
-						</div>
 						<div className="relative flex items-center sm:flex-col sm:justify-center border-b text-zinc-700 bg-zinc-100 justify-between">
 							<div className="px-10 py-4 flex items-center gap-4 sm:flex-col sm:text-center">
-								<img className="rounded-full h-20 w-20 sm:ml-5 select-none pointer-events-none shadow-sm" src={  profile.avatar } />
-								<div className="flex-col ml-5">
+								<img className="rounded-full h-20 w-20 select-none pointer-events-none shadow-sm" src={  profile.avatar } />
+								<div className="flex-col xl:ml-5 md:ml-5">
 									<h2 className="font-bold text-xl mb-1">{ profile.username }</h2>
 									<hr className="mb-2" />
 									<p className="text-zinc-400 text-xs mb-1">
@@ -46,7 +43,7 @@ export default function Profile() {
 								{ (user && (profile.id === user.id)) && (
 									<Dropdown 
 									text={
-										<div className="bg-zinc-50 mt-[5px] cursor-pointer relative border-2 border-zinc-300 shadow-md rounded h-[50px] text-zinc-700 p-3 text-center transition-colors hover:bg-zinc-100">
+										<div className="bg-zinc-50 mt-[5px] cursor-pointer relative border-2 border-zinc-300 shadow-sm rounded h-[50px] text-zinc-700 p-3 text-center transition-colors hover:bg-zinc-100">
 											<MoreVertical size={20} />
 										</div>
 									}

@@ -11,7 +11,7 @@ export default function EditAccount() {
 	const [failedLogin, setFailedLogin] = useState(false);
 	const [loginError, setLoginError] = useState("");
 	const [waitingRegs, setWaitingRegs] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [username, setUsername] = useState("");
 	const [biography, setBiography] = useState("");
@@ -68,6 +68,7 @@ export default function EditAccount() {
 		} else if (typeField === "biography") {
 			setBiography(field.target.value);
 		}
+		setIsLoading(false);
 	};
 
 	return (
@@ -77,8 +78,8 @@ export default function EditAccount() {
 					<div className="w-full flex flex-col -mt-10">
 						<div className="relative flex items-center sm:flex-col sm:justify-center border-b text-zinc-700 bg-zinc-100 justify-between">
 							<div className="px-10 py-4 flex items-center gap-4 sm:flex-col sm:text-center">
-								<img className="rounded-full h-20 w-20 sm:ml-5 select-none pointer-events-none shadow-sm" src={  profile.avatar } />
-								<div className="flex-col ml-5">
+								<img className="rounded-full h-20 w-20 xl:ml-5 md:ml-5 select-none pointer-events-none shadow-sm" src={  profile.avatar } />
+								<div className="flex-col xl:ml-5 md:ml-5">
 									<h2 className="font-bold text-xl mb-1">{ profile.username }</h2>
 									<hr className="mb-2" />
 									<p className="text-zinc-400 text-xs mb-1">
