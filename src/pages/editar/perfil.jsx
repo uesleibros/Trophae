@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function EditAccount() {
-	const { user } = useAuth();
+	const { user, updateUser } = useAuth();
 
 	const profile = user?.user_metadata;
 	const [profileImage, setProfileImage] = useState(null);
@@ -96,7 +96,9 @@ export default function EditAccount() {
 		if (!presetFailedLogin) {
 			setWaitingRegs(true);
 		}
+
 		setIsLoading(false);
+		updateUser();
 	}
 
 	function validateUsername(input) {
@@ -198,8 +200,6 @@ export default function EditAccount() {
 									  value={biography}
 									  onChange={(e) => changeField("biography", e)}
 									  autoComplete="off"
-									  minLength={3}
-									  maxLength={40}
 									  rows={1}
 									/>
 
