@@ -28,7 +28,7 @@ export default function Profile() {
 					<div className="w-full flex flex-col -mt-10">
 						<div className="relative flex items-center sm:flex-col sm:justify-center border-b text-zinc-700 bg-zinc-100 justify-between">
 							<div className="px-10 py-4 flex items-center gap-4 sm:flex-col sm:text-center">
-								<Image className="rounded-full select-none pointer-events-none shadow-sm" priority src={  profile.avatar } height={100} width={100} quality={100} priority  alt="Foto de Perfil" />
+								<Image className="rounded-full select-none pointer-events-none shadow-sm" src={  profile.avatar } height={100} width={100} quality={100} priority  alt="Foto de Perfil" />
 								<div className="flex-col xl:ml-5 md:ml-5">
 									<h2 className="font-bold text-xl mb-1">{ profile.username }</h2>
 									<hr className="mb-2" />

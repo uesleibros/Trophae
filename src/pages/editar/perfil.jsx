@@ -166,7 +166,7 @@ export default function EditAccount() {
 
 									<input className="mt-5 bg-zinc-100 py-2 px-2 rounded shadow-md border outline-none" type="file" id="profile" accept="image/png, image/jpeg, image/webp" onChange={handleImageChange} />
 
-									<button type="submit" className="px-10 text-zinc-50 font-semibold mt-10 bg-blue-600 py-2 border rounded border-blue-900 transition-all hover:bg-blue-500 duration-500 disabled:opacity-50 disabled:pointer-events-none" type="button" onClick={uploadProfileImage}>Atualizar foto de perfil</button>
+									<button type="submit" className="px-10 text-zinc-50 font-semibold mt-10 bg-blue-600 py-2 border rounded border-blue-900 transition-all hover:bg-blue-500 duration-500 disabled:opacity-50 disabled:pointer-events-none" onClick={uploadProfileImage}>Atualizar foto de perfil</button>
 								</form>
 								<form className="w-[100%]">
 									<label htmlFor="username" className="text-zinc-700">Nome de Usuário</label>
