@@ -17,7 +17,6 @@ export function AuthProvider({ children }) {
 	(async () => {
 		const session = await supabase.auth.getUser();
 		if (!user) {
-			console.log("Oi");
 			if (session.data.user === null)
 				await RemoveAccountItems();
 

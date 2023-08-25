@@ -1,6 +1,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useAuth  } from "@/context/AuthContext.js";
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function EditAccount() {
@@ -117,6 +118,7 @@ export default function EditAccount() {
 		} else if (typeField === "biography") {
 			setBiography(field.target.value);
 		}
+		setWaitingRegs(false);
 		setIsLoading(false);
 	};
 
@@ -127,7 +129,7 @@ export default function EditAccount() {
 					<div className="w-full flex flex-col -mt-10">
 						<div className="relative flex items-center sm:flex-col sm:justify-center border-b text-zinc-700 bg-zinc-100 justify-between">
 							<div className="px-10 py-4 flex items-center gap-4 sm:flex-col sm:text-center">
-								<img className="rounded-full h-20 w-20 xl:ml-5 md:ml-5 select-none pointer-events-none shadow-sm" src={  profile.avatar } />
+								<Image className="rounded-full xl:ml-5 md:ml-5 select-none pointer-events-none shadow-sm" src={  profile.avatar } height={100} width={100} quality={100} priority alt="Foto de perfil" />
 								<div className="flex-col xl:ml-5 md:ml-5">
 									<h2 className="font-bold text-xl mb-1">{ profile.username }</h2>
 									<hr className="mb-2" />
@@ -160,7 +162,7 @@ export default function EditAccount() {
 						<div className="flex flex-col gap-4 mb-10">
 							<div className="w-[70%] sm:w-[100%] mt-10">
 								<form className="mb-10" type="post">
-									<img className="rounded-full h-40 w-40 xl:ml-5 md:ml-5 select-none pointer-events-none shadow-xl" src={  profile.avatar } />
+									<Image className="rounded-full xl:ml-5 md:ml-5 select-none pointer-events-none shadow-sm" src={  profile.avatar } height={230} width={230} quality={100} priority alt="Foto de perfil" />
 
 									<input className="mt-5 bg-zinc-100 py-2 px-2 rounded shadow-md border outline-none" type="file" id="profile" accept="image/png, image/jpeg, image/webp" onChange={handleImageChange} />
 

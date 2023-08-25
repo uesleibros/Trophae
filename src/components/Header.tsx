@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import Dropdown from "@/components/Dropdown";
+import Image from "next/image";
 import { useAuth  } from "@/context/AuthContext.js";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Search, Menu } from "lucide-react";
@@ -93,7 +94,7 @@ export default function Header() {
 							<>
 								<Dropdown 
 								text={
-									<img className="rounded-full shadow-md object-cover w-10 h-10 mb-0 pb-0 mt-2 select-none pointer-events-none" src={ user.user_metadata.avatar } alt="Foto de Perfil" />
+									<Image className="rounded-full shadow-md object-cover mb-0 pb-0 mt-2 select-none pointer-events-none" src={ user.user_metadata.avatar } height={40} width={40} quality={100} priority alt="Foto de Perfil" />
 								}
 								items={accountItems}
 								/>

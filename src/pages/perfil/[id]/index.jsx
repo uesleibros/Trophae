@@ -3,6 +3,7 @@ import Dropdown from "@/components/Dropdown";
 import { useAuth  } from "@/context/AuthContext.js";
 import { Trophy, MoreVertical } from "lucide-react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 
@@ -27,7 +28,7 @@ export default function Profile() {
 					<div className="w-full flex flex-col -mt-10">
 						<div className="relative flex items-center sm:flex-col sm:justify-center border-b text-zinc-700 bg-zinc-100 justify-between">
 							<div className="px-10 py-4 flex items-center gap-4 sm:flex-col sm:text-center">
-								<img className="rounded-full h-20 w-20 select-none pointer-events-none shadow-sm" src={  profile.avatar } />
+								<Image className="rounded-full select-none pointer-events-none shadow-sm" priority src={  profile.avatar } height={100} width={100} quality={100} priority  alt="Foto de Perfil" />
 								<div className="flex-col xl:ml-5 md:ml-5">
 									<h2 className="font-bold text-xl mb-1">{ profile.username }</h2>
 									<hr className="mb-2" />
