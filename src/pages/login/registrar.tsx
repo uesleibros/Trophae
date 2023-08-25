@@ -21,6 +21,12 @@ export default function LoginPage() {
 
 	const supabase = createClientComponentClient();
 
+	function clearFields() {
+		setEmail("");
+		setPassword("");
+		setUsername("");
+	}
+
 	async function handleSignUp() {
 		setIsLoading(true);
 		const { data, error } = await supabase.auth.signUp({ email: email, password: password, 
@@ -38,17 +44,20 @@ export default function LoginPage() {
 
 		presetFailedLogin = error !== null;
 		setFailedLogin(error !== null);
-		
 		setLoginError(String(error).replace("AuthApiError:", "").trim());
 
 		if (!validateEmail(email) && !validatePassword(password) && !validateUsername(username)) {
 			setIsEmailValid(validateEmail(email));
 			setIsPasswordValid(validatePassword(password));
 			setIsUsernameValid(validateUsername(username));
+			presetFailedLogin = true;
+			setFailedLogin(true);
+			setLoginError("Fields needs current format.");
 		}
 
 		if (!presetFailedLogin) {
 			setWaitingRegs(true);
+			clearFields();
 		}
 		setIsLoading(false);
 	}

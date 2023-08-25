@@ -7,12 +7,22 @@ export function useAuth() {
 	return useContext(AuthContext);
 }
 
+async function RemoveAccountItems() {
+	await supabase.auth.signOut();
+}
+
 export function AuthProvider({ children }) {
 	const [user, setUser] = useState(null);
 
 	(async () => {
 		const session = await supabase.auth.getUser();
-		setUser(session.data.user);
+		if (!user) {
+			console.log("Oi");
+			if (session.data.user === null)
+				await RemoveAccountItems();
+
+			setUser(session.data.user);
+		}
 	})();
 
 	const signOut = () => {

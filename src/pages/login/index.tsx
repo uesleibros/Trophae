@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useState, ReactNode } from "react";
 
 export default function LoginPage() {
+	let presetFailedLogin = false;
 	const [failedLogin, setFailedLogin] = useState(false);
 	const [loginError, setLoginError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
@@ -22,20 +23,25 @@ export default function LoginPage() {
 		setIsLoading(true);
 		const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-		if (!validateEmail(email) && !validatePassword(password)) {
-			setIsEmailValid(validateEmail(email));
-			setIsPasswordValid(validatePassword(password));
-			setIsLoading(false);
-			return;
-		}
-
+		presetFailedLogin = error !== null;
 		setFailedLogin(error !== null);
 		setLoginError(String(error).replace("AuthApiError:", "").trim());
 		setIsLoading(false);
 
-		if (!failedLogin) {
-			router.push("/");
+		if (!validateEmail(email) && !validatePassword(password)) {
+			setIsEmailValid(validateEmail(email));
+			setIsPasswordValid(validatePassword(password));
+			setIsLoading(false);
+			setFailedLogin(true);
+			presetFailedLogin = true;
+			setLoginError("Fields needs current format.");
+			return;
 		}
+
+		if (!presetFailedLogin)
+			router.push("/");
+		
+		setIsLoading(false);
 	}
 
 	async function handleDiscordSignIn() {

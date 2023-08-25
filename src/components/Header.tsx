@@ -28,7 +28,7 @@ export default function Header() {
 			}, 
 			{
 				label: <span className="text-red-500">Desconectar</span>, 
-				link: "/auth/signout", 
+				link: "/auth/signout",
 				divide: true
 			} 
 		];

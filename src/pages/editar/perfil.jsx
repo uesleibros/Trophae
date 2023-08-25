@@ -5,7 +5,9 @@ import Link from "next/link";
 
 export default function EditAccount() {
 	const { user } = useAuth();
+
 	const profile = user?.user_metadata;
+	const [profileImage, setProfileImage] = useState(null);
 
 	let presetFailedLogin = false;
 	const [failedLogin, setFailedLogin] = useState(false);
@@ -18,6 +20,53 @@ export default function EditAccount() {
 	const [isUsernameValid, setIsUsernameValid] = useState(true);
 
 	const supabase = createClientComponentClient();
+
+	const handleImageChange = (e) => {
+		if (e.target.files && e.target.files[0]) {
+			const img = e.target.files[0];
+			setProfileImage(img);
+		}
+	};
+
+	async function uploadProfileImage(e) {
+		e.preventDefault();
+		if (!profileImage) return;
+		let base64Img = await getBase64(profileImage);
+
+		if (typeof base64Img == "string") {
+		  base64Img = base64Img.replace(/^data:.+base64,/, "")
+		}
+
+		const result = await fetch("/api/image/upload", {
+		  method: "POST",
+		  headers: {
+		      "Content-Type": "application/json",
+		  },
+		  body: JSON.stringify({ image: base64Img }),
+		});
+
+		const response = await result.json();
+		const { data, error } = await supabase.auth.updateUser({
+			data: {
+				avatar: response.link
+			}
+		});
+
+		await supabase.from("profiles").update({
+			avatar: response.link
+		}).eq("id", user.id);
+
+		setWaitingRegs(true);
+	}
+
+	function getBase64(file) {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = error => reject(error);
+		});
+	}
 
 	async function handleSaveChanges() {
 		setIsLoading(true);
@@ -36,11 +85,11 @@ export default function EditAccount() {
 
 		presetFailedLogin = error !== null;
 		setFailedLogin(error !== null);
-		
 		setLoginError(String(error).replace("AuthApiError:", "").trim());
 
 		if (!validateUsername(username)) {
 			setIsUsernameValid(validateUsername(username));
+			presetFailedLogin = true;
 		}
 
 		if (!presetFailedLogin) {
@@ -110,6 +159,13 @@ export default function EditAccount() {
 						</div>
 						<div className="flex flex-col gap-4 mb-10">
 							<div className="w-[70%] sm:w-[100%] mt-10">
+								<form className="mb-10" type="post">
+									<img className="rounded-full h-40 w-40 xl:ml-5 md:ml-5 select-none pointer-events-none shadow-xl" src={  profile.avatar } />
+
+									<input className="mt-5 bg-zinc-100 py-2 px-2 rounded shadow-md border outline-none" type="file" id="profile" accept="image/png, image/jpeg, image/webp" onChange={handleImageChange} />
+
+									<button type="submit" className="px-10 text-zinc-50 font-semibold mt-10 bg-blue-600 py-2 border rounded border-blue-900 transition-all hover:bg-blue-500 duration-500 disabled:opacity-50 disabled:pointer-events-none" type="button" onClick={uploadProfileImage}>Atualizar foto de perfil</button>
+								</form>
 								<form className="w-[100%]">
 									<label htmlFor="username" className="text-zinc-700">Nome de Usuário</label>
 									<input 
