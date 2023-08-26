@@ -48,7 +48,7 @@ export default function Header() {
 	useEffect(() => {
 		const handleKeyPress = (event: KeyboardEvent) => {
 			if (projectsInput.current && !projectsInput.current.contains(event.target as Node)) {
-		      if (event.key === "/" && projectsInput.current.value.length === 0) {
+		      if (event.ctrlKey && event.key === "/" && projectsInput.current.value.length === 0) {
 		        event.preventDefault();
 		        projectsInput.current.focus();
 		      }

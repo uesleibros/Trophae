@@ -14,17 +14,15 @@ async function RemoveAccountItems() {
 export function AuthProvider({ children }) {
 	const [user, setUser] = useState(null);
 
-	const updateUser = () => {
-		(async () => {
-			const session = await supabase.auth.getUser();
-			if (!user) {
-				if (session.data.user === null)
-					await RemoveAccountItems();
+	(async () => {
+		const session = await supabase.auth.getUser();
+		if (!user) {
+			if (session.data.user === null)
+				await RemoveAccountItems();
 
-				setUser(session.data.user);
-			}
-		})();
-	}
+			setUser(session.data.user);
+		}
+	})();
 
 	const signOut = () => {
 		(async () => {
@@ -40,7 +38,12 @@ export function AuthProvider({ children }) {
 		return await supabase.auth.signOut();
 	}
 
-	updateUser();
+	const updateUser = () => {
+		(async () => {
+			const session = await supabase.auth.getUser();
+			setUser(session.data.user);
+		})();
+	}
 
 	const value = { user, userAsync, signOut, signOutAsync, updateUser };
 

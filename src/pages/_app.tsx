@@ -15,12 +15,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<meta property="og:title" content="Trophae" />
 				<meta property="description" content="O melhor serviço de conquistas feito para projetos criados em PowerPoint." />
 				<meta property="og:description" content="O melhor serviço de conquistas feito para projetos criados em PowerPoint." />
-				
+				<meta property="og:image" content="/logo.png" />
+
 				{/* Twitter */}
 				<meta property="twitter:title" content="Trophae" />
 				<meta property="twitter:description" content="O melhor serviço de conquistas feito para projetos criados em PowerPoint." />
 				<meta property="twitter:card" content="summary_large_image" />
+				<meta property="twitter:image" content="/logo.png" />
 
+				<link rel="icon" href="/logo.png" />
 				<title>Trophae</title>
 			</Head>
 			<AuthProvider>
